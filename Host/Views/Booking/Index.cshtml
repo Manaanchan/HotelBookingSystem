@@ -1,0 +1,115 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    @model ICollection<BookingResponseModel>
+}
+@{
+    ViewData["Title"] = "Bookings";
+}
+
+<div class="max-w-7xl mx-auto px-6 py-8">
+
+    <div class="flex justify-between items-center mb-6">
+        <h1 class="text-3xl font-bold text-gray-800">
+            Booking List
+        </h1>
+
+        <a asp-action="Create"
+           class="bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700">
+            + New Booking
+        </a>
+    </div>
+
+    <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+
+        <table class="min-w-full">
+            <thead class="bg-gray-800 text-white">
+                <tr>
+                    <th class="px-6 py-3 text-left">S/N</th>
+                    <th class="px-6 py-3 text-left">Customer</th>
+                    <th class="px-6 py-3 text-left">Room</th>
+                    <th class="px-6 py-3 text-left">Check In</th>
+                    <th class="px-6 py-3 text-left">Check Out</th>
+                    <th class="px-6 py-3 text-left">Total Price</th>
+                    <th class="px-6 py-3 text-center">Status</th>
+                    <th class="px-6 py-3 text-center">Actions</th>
+                </tr>
+            </thead>
+
+            <tbody class="divide-y divide-gray-200">
+
+                @{
+                    int count = 1;
+                }
+
+                @foreach (var booking in Model)
+                {
+                    <tr class="hover:bg-gray-100">
+
+                        <td class="px-6 py-4">
+                            @count
+                        </td>
+
+                        <td class="px-6 py-4">
+                            @booking.RoomNumber
+                        </td>
+                        <td class="px-6 py-4">
+                            @booking.RoomType
+                        </td>
+
+                        <td class="px-6 py-4">
+                            @booking.CheckInDate.ToShortDateString()
+                        </td>
+
+                        <td class="px-6 py-4">
+                            @booking.CheckOutDate.ToShortDateString()
+                        </td>
+
+                        <td class="px-6 py-4">
+                            ₦@booking.TotalAmount
+                        </td>
+
+                        <td class="px-6 py-4 text-center">
+                                @if (booking.BookingStatus == "Booked")
+                            {
+                                <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm">
+                                    Booked
+                                </span>
+                            }
+                            else
+                            {
+                                <span class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-sm">
+                                    Cancelled
+                                </span>
+                            }
+                        </td>
+
+                        <td class="px-6 py-4 text-center space-x-2">
+
+                            <a asp-action="Details"
+                                asp-area-id="@booking.Id"
+                               class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600">
+                                Details
+                            </a>
+
+                            <a asp-action="Delete"
+                               asp-area-id="@booking.Id"
+                               class="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700">
+                                Delete
+                            </a>
+
+                        </td>
+
+                    </tr>
+
+                    count++;
+                }
+
+            </tbody>
+        </table>
+
+    </div>
+
+</div>
+}

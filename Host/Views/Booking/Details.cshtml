@@ -1,0 +1,131 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    @model BookingDTO;
+    ViewData["Title"] = "Booking Details";
+}
+
+<div class="max-w-4xl mx-auto mt-10">
+
+    <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+
+        <div class="bg-blue-600 text-white px-6 py-4">
+            <h2 class="text-2xl font-bold">Booking Details</h2>
+        </div>
+
+        <div class="p-8">
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                <div>
+                    <p class="text-gray-500 text-sm">Booking ID</p>
+                    <p class="font-semibold">@Model.Id</p>
+                </div>
+
+
+                <div>
+                    <p class="text-gray-500 text-sm">Room Number</p>
+                    <p class="font-semibold">@Model.RoomNumber>
+                </div>
+
+                <div>
+                    <p class="text-gray-500 text-sm">Room Type</p>
+                    <p class="font-semibold">@Model.RoomType</p>
+                </div>
+
+                <div>
+                    <p class="text-gray-500 text-sm">Check-In Date</p>
+                    <p class="font-semibold">
+                        @Model.CheckInDate.ToString("dd MMM yyyy")
+                    </p>
+                </div>
+
+                <div>
+                    <p class="text-gray-500 text-sm">Check-Out Date</p>
+                    <p class="font-semibold">
+                        @Model.CheckOutDate.ToString("dd MMM yyyy")
+                    </p>
+                </div>
+
+                <div>
+                    <p class="text-gray-500 text-sm">Number of Guests</p>
+                    <p class="font-semibold">@Model.NumberOfGuests</p>
+                </div>
+
+                <div>
+                    <p class="text-gray-500 text-sm">Total Price</p>
+                    <p class="font-semibold text-green-600">
+                        ₦@Model.TotalAmount
+                    </p>
+                </div>
+
+                <div>
+                    <p class="text-gray-500 text-sm">Payment Status</p>
+
+                    @if (Model.BookingStatus == "Paid")
+                    {
+                        <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm">
+                            Paid
+                        </span>
+                    }
+                    else
+                    {
+                        <span class="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-sm">
+                            Pending
+                        </span>
+                    }
+                </div>
+
+                <div>
+                    <p class="text-gray-500 text-sm">Booking Status</p>
+
+                    @if (Model.BookingStatus == "Booked")
+                    {
+                        <span class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm">
+                            Booked
+                        </span>
+                    }
+                    else if (Model.BookingStatus == "Checked In")
+                    {
+                        <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm">
+                            Checked In
+                        </span>
+                    }
+                    else if (Model.BookingStatus == "Checked Out")
+                    {
+                        <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">
+                            Checked Out
+                        </span>
+                    }
+                    else
+                    {
+                        <span class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-sm">
+                            Cancelled
+                        </span>
+                    }
+                </div>
+
+            </div>
+
+            <div class="mt-10 flex justify-between">
+
+                <a asp-action="Index"
+                   class="bg-gray-600 hover:bg-gray-700 text-white px-6 py-2 rounded-lg">
+                    Back
+                </a>
+
+                <a asp-action="Edit"
+                   asp-route-id="@Model.Id"
+                   class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg">
+                    Edit Booking
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+}
