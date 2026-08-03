@@ -13,7 +13,6 @@ namespace Application.Services
 
         public async Task<BaseResponse<BookingResponseModel>> CreateBooking(BookingRequestModel request)
         {
-            // Check if customer exists
             var customer = await customerRepository.GetCustomerAsync(request.CustomerId);
 
             if (customer == null)
@@ -25,7 +24,6 @@ namespace Application.Services
                 };
             }
 
-            // Check if room exists
             var room = await roomRepository.GetRoomByIdAsync(request.RoomId);
 
             if (room == null)
