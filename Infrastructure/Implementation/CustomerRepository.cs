@@ -3,6 +3,7 @@ using Domain;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace Infrastructure.Implementation
@@ -24,10 +25,10 @@ namespace Infrastructure.Implementation
             return await context.Customers.ToListAsync();
         }
 
-        public void Update(Customer customer)
+        public async Task Update(Customer customer)
         {
             context.Customers.Update(customer);
-            context.SaveChanges();
+             await context.SaveChangesAsync();
         }
 
         public void DeleteCustomer(Guid id)

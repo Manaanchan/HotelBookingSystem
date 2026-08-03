@@ -2,4 +2,79 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
+    @model RoomResponseModel
+
 }
+@{
+    ViewData["Title"] = "Delete Room";
+}
+
+<div class="max-w-3xl mx-auto mt-10">
+    <div class="bg-white shadow-lg rounded-lg p-8">
+
+        <h2 class="text-3xl font-bold text-red-600 text-center mb-6">
+            Delete Room
+        </h2>
+
+        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg mb-6">
+            <strong>Warning!</strong> Are you sure you want to delete this room?
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+            <div>
+                <label class="block font-semibold text-gray-700">Room Number</label>
+                <p class="mt-1">@Model.RoomNumber</p>
+            </div>
+
+            <div>
+                <label class="block font-semibold text-gray-700">Room Type</label>
+                <p class="mt-1">@Model.RoomTypeId</p>
+            </div>
+
+            <div>
+                <label class="block font-semibold text-gray-700">Price Per Night</label>
+                <p class="mt-1">₦@Model.PricePerNight.ToString("N2")</p>
+            </div>
+
+            <div>
+                <label class="block font-semibold text-gray-700">Capacity</label>
+                <p class="mt-1">@Model.Capacity</p>
+            </div>
+
+            <div class="md:col-span-2">
+                <label class="block font-semibold text-gray-700">Price</label>
+                <p class="mt-1">@Model.Price</p>
+            </div>
+
+            <div class="md:col-span-2">
+                <label class="block font-semibold text-gray-700">Availability</label>
+                <p class="mt-1">
+                    @(Model.IsAvailable ? "Available" : "Not Available")
+                </p>
+            </div>
+
+        </div>
+
+        <form asp-action="Delete" method="post" class="mt-8">
+
+            <input asp-for="Id" type="hidden" />
+
+            <div class="flex justify-between">
+
+                <a asp-action="Index"
+                   class="bg-gray-500 hover:bg-gray-600 text-white px-6 py-2 rounded-lg">
+                    Cancel
+                </a>
+
+                <button type="submit"
+                        class="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-lg">
+                    Delete Room
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+</div>

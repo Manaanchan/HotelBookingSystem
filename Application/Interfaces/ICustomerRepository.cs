@@ -10,7 +10,7 @@ namespace Application.Repository
         Task CreateCustomer(Customer customer);
         Task<ICollection<Customer>> GetAllCustomersAsync();
         Task<Customer?> GetCustomerAsync(string email);
-        void Update(Customer customer);
+        Task Update(Customer customer);
         void DeleteCustomer(Guid id);
     }
 }

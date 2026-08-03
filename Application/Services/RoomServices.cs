@@ -13,7 +13,7 @@ namespace Application.Services
     {
             public async Task<BaseResponse<RoomResponseModel>> AddRoom(RoomRequestModel request)
             {
-                var roomExist = await roomRepository.GetRoomByIdAsync(r => r.RoomNumber == request.RoomNumber);
+                var roomExist = await roomRepository.GetRoomByIdAsync(request.RoomNumber);
 
                 if (roomExist != null)
                 {

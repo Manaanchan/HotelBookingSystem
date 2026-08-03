@@ -7,13 +7,13 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Application.Services
-{
-    public class CustomerServices(ICustomerRepository customerRepository) : ICustomerService
-    {
+  namespace Application.Services
+  {
+        public class CustomerServices(ICustomerRepository customerRepository) : ICustomerService
+        {
             public async Task<BaseResponse<CustomerResponseModel>> RegisterCustomer(CustomerRequestModel request)
             {
-                var customerExist = await customerRepository.GetCustomerAsync(c => c.Email == request.Email);
+                var customerExist = await customerRepository.GetCustomerAsync(request.Email);
 
                 if (customerExist != null)
                 {
@@ -49,11 +49,11 @@ namespace Application.Services
                         Address = customer.Address
                     }
                 };
-            }
 
-            public async Task<BaseResponse<CustomerResponseModel>> DeleteCustomer(Guid id)
+            }   
+            public async Task<BaseResponse<CustomerResponseModel>> DeleteCustomer(string email)
             {
-                var customer = await customerRepository.GetCustomerAsync(c => c.Id == id);
+                var customer = await customerRepository.GetCustomerAsync(email);
 
                 if (customer == null)
                 {
@@ -94,9 +94,9 @@ namespace Application.Services
                 };
             }
 
-            public async Task<BaseResponse<CustomerResponseModel>> GetCustomerById(Guid id)
+            public async Task<BaseResponse<CustomerResponseModel>> GetCustomerById(string email)
             {
-                var customer = await customerRepository.GetCustomerAsync(c => c.Id == id);
+                var customer = await customerRepository.GetCustomerAsync(email);
 
                 if (customer == null)
                 {
@@ -122,9 +122,9 @@ namespace Application.Services
                 };
             }
 
-            public async Task<BaseResponse<CustomerResponseModel>> UpdateCustomer(Guid id, CustomerRequestModel request)
+            public async Task<BaseResponse<CustomerResponseModel>> UpdateCustomer(string email, CustomerResponseModel request)
             {
-                var customer = await customerRepository.GetCustomerAsync(c => c.Id == id);
+                var customer = await customerRepository.GetCustomerAsync(email);
 
                 if (customer == null)
                 {
@@ -158,6 +158,8 @@ namespace Application.Services
                     }
                 };
             }
+        
+
         }
-    }
-}
+    
+  }

@@ -8,10 +8,10 @@ namespace Application.Interfaces
     public interface ICustomerService
     {
         Task<BaseResponse<CustomerResponseModel>> RegisterCustomer(CustomerRequestModel request);
-        Task<BaseResponse<CustomerResponseModel>> GetCustomerById(Guid id);
+        Task<BaseResponse<CustomerResponseModel>> GetCustomerById(string email);
         Task<BaseResponse<ICollection<CustomerResponseModel>>> GetAllCustomers();
-        Task<BaseResponse<CustomerResponseModel>> DeleteCustomer(Guid id);
-        Task<BaseResponse<CustomerResponseModel>> UpdateCustomer(CustomerResponseModel request);
+        Task<BaseResponse<CustomerResponseModel>> DeleteCustomer(string email);
+        Task<BaseResponse<CustomerResponseModel>> UpdateCustomer(string email,CustomerResponseModel request);
     }
     
 }

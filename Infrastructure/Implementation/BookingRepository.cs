@@ -29,10 +29,10 @@ namespace Infrastructure.Implementation
             return await context.Bookings.ToListAsync(); 
         }
 
-        public async Task<Booking> GetBookingById(Guid id)
+        public async Task<Booking> GetBookingByIdAsync(Guid id)
         {
             return await context.Bookings.FirstOrDefaultAsync(x => x.Id == id);
-        }        
+        }
 
         public void UpdateBooking(Booking booking)
         {

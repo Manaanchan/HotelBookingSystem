@@ -13,7 +13,7 @@ namespace Application.Services
     {
         public async Task<BaseResponse<RoleResponseModel>> CreateRole(RoleRequestModel request)
         {
-            var exist = await roleRepository.AddRole(r => r.Name == request.Name);
+            var exist = await roleRepository.AddRole(request.Name);
 
             if (exist != null)
             {
@@ -46,7 +46,7 @@ namespace Application.Services
 
         public async Task<BaseResponse<RoleResponseModel>> DeleteRole(Guid id)
         {
-            var role = await roleRepository.GetRoleById(r => r.Id == id);
+            var role = await roleRepository.GetRoleById(id);
 
             if (role == null)
             {
@@ -93,7 +93,7 @@ namespace Application.Services
         public async Task<BaseResponse<RoleResponseModel>> GetRole(Guid id)
         {
 
-            var role = await roleRepository.GetRoleById(r => r.Id == id);
+            var role = await roleRepository.GetRoleById(id);
 
             if (role == null)
             {
@@ -116,9 +116,9 @@ namespace Application.Services
             };
         }
 
-        public async Task<BaseResponse<RoleResponseModel>> Update(RoleRequestModel request)
+        public async Task<BaseResponse<RoleResponseModel>> Update(Guid id,RoleRequestModel request)
         {
-            var role = await roleRepository.GetRoleById(r => r.Id == id);
+            var role = await roleRepository.GetRoleById(id);
 
             if (role == null)
             {
